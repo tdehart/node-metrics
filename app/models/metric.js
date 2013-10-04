@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
  
 var MetricSchema = Schema({
   //listing: {type : Schema.ObjectId, ref : 'Listing'},
-  //user: {type : Schema.ObjectId, ref : 'User'},
+  profile: {type : Schema.ObjectId, ref : 'Profile'},
   comment_text: {type: String, default: ''},
   comment_rating: {type: Number, min: 1, max: 5 },
   comment_date: {type: Date, default: Date.now},
@@ -16,13 +16,13 @@ var MetricSchema = Schema({
 MetricSchema.statics = {
   load: function (id, cb) {
     this.findOne({ _id : id })
-      // .populate('user', 'name email username')
-      // .populate('comments.user')
+      .populate('profile', 'username email')
       .exec(cb)
   },
 
   list: function(cb) {
     this.find()
+      .populate('profile', 'username email')
       .sort({ 'createdAt': -1 })
       .exec(cb)
   }

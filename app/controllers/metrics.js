@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     Metric = mongoose.model('Metric'),
-    _ = require('lodash');
+    Profile = mongoose.model('Profile'),
+    _ = require('lodash')
 
 exports.load = function(req, res, next, id){
   Metric.load(id, function (err, metric) {
@@ -28,13 +29,19 @@ exports.list = function(req, res) {
 exports.create = function (req, res) {
   var metric = new Metric(req.body)
 
-  metric.create(function (err) {
-    if (err) {
-      res.send({'error':'An error has occurred when creating'});
-    } else {
-      res.send(metric);
-    }
-  })
+
+  Profile.findOne({ email: req.body.profile }, function (err, profile) {
+    metric.profile = profile._id
+    metric.create(function (err) {
+      if (err) {
+        res.send({'error':'An error has occurred when creating'});
+      } else {
+        res.send(metric);
+      }
+    })
+  });
+
+  
 }
 
 exports.update = function(req, res){

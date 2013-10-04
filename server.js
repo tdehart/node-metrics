@@ -1,5 +1,6 @@
 var express = require('express'),
-    fs = require('fs')
+    fs = require('fs'),
+    async = require('async')
 
 var env = process.env.NODE_ENV || 'development',
     config = require('./config/config')[env],
@@ -27,9 +28,17 @@ db.on('error', console.error);
 db.once('open', function() {
   console.log("Database open")
 
-  // Metric = mongoose.model('Metric')
-  // var metric = new Metric({comment_text: "Example comment"})
-  // metric.save()
+  // var Profile = mongoose.model('Profile'),
+  //     Metric = mongoose.model('Metric')
+
+  // async.parallel([
+  //   function (cb) {
+  //     Profile.collection.remove(cb)
+  //   },
+  //   function (cb) {
+  //     Metric.collection.remove(cb)
+  //   }
+  // ])
 
 });
 
