@@ -1,0 +1,10 @@
+{
+    "name": "metrics",
+    "description": "Metrics Application",
+    "version": "0.0.1",
+    "private": false,
+    "dependencies": {
+        "express": "latest",
+        "mongoose": "latest"
+    }
+}
