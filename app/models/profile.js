@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema
 
 var ProfileSchema = Schema({
-  full_name: {type: String, default: ''},
+  fullName: {type: String, default: ''},
   username: {type: String, default: ''},
   email: {type: String, default: ''}
 });

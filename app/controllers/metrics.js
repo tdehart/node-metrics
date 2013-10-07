@@ -1,7 +1,9 @@
 var mongoose = require('mongoose'),
     Metric = mongoose.model('Metric'),
     Profile = mongoose.model('Profile'),
-    _ = require('lodash')
+    Listing = mongoose.model('Listing'),
+    _ = require('lodash'),
+    async = require('async')
 
 exports.load = function(req, res, next, id){
   Metric.load(id, function (err, metric) {
@@ -19,7 +21,7 @@ exports.show = function(req, res) {
 exports.list = function(req, res) {
   Metric.list(function(err, metrics) {
     if (err) {
-      res.send({'error':'An error has occurred'});
+      res.send({'error':'An error has occurred'})
     }
 
     res.send(metrics)
@@ -27,21 +29,43 @@ exports.list = function(req, res) {
 }
 
 exports.create = function (req, res) {
-  var metric = new Metric(req.body)
+    //Find profile by email and listing by universalName in parallel then create metric
+    async.parallel([
+      function (cb) {
+        Profile.findOne({ email: req.body.profile }, function (err, profile) {
+          cb(err, profile)
+        })
+      },
+      function (cb) {
+        Listing.findOne({ universalName: req.body.listing }, function (err, listing) {
+          cb(err, listing)
+        })
+      }
+    ],
 
-
-  Profile.findOne({ email: req.body.profile }, function (err, profile) {
-    metric.profile = profile._id
-    metric.create(function (err) {
+    function(err, results) {
       if (err) {
-        res.send({'error':'An error has occurred when creating'});
+        res.send({'error':'An error has occurred while finding metric references'})
       } else {
-        res.send(metric);
+        var metric = new Metric({
+          commentText: req.body.commentText,
+          commentRating: req.body.commentRating,
+          commentDate: req.body.commentDate,
+          userAgent: req.body.userAgent,
+          siteUrl: req.body.siteUrl,
+          profile: results[0]._id,
+          listing: results[1]._id
+        })
+
+        metric.create(function (err) {
+          if (err) {
+            res.send({'error':'An error has occurred when creating'})
+          } else {
+            res.send(metric);
+          }
+        })  
       }
     })
-  });
-
-  
 }
 
 exports.update = function(req, res){
@@ -50,7 +74,7 @@ exports.update = function(req, res){
 
   metric.update(function (err) {
     if (err) {
-      res.send({'error':'An error has occurred when updating'});
+      res.send({'error':'An error has occurred when updating'})
     } else {
       res.send(metric);
     }
@@ -61,7 +85,7 @@ exports.destroy = function(req, res){
   var metric = req.metric
   metric.destroy(function(err) {
     if (err) {
-      res.send({'error':'An error has occurred when deleting'});
+      res.send({'error':'An error has occurred when deleting'})
     } else {
       res.send("Deleted successfully")  
     }
