@@ -6,10 +6,13 @@ lib-cov
 *.out
 *.pid
 *.gz
+*.pem
+*.csr
 
 pids
 logs
 results
+scaffolds
 
 npm-debug.log
 node_modules

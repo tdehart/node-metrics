@@ -47,14 +47,19 @@ exports.create = function (req, res) {
       if (err) {
         res.send({'error':'An error has occurred while finding metric references'})
       } else {
+        var attributes
+        if (req.body.attributes) attributes = JSON.parse(req.body.attributes)
         var metric = new Metric({
-          commentText: req.body.commentText,
-          commentRating: req.body.commentRating,
-          commentDate: req.body.commentDate,
+          profile: results[0] && results[0]._id,
+          listing: results[1] && results[1]._id,
           userAgent: req.body.userAgent,
           siteUrl: req.body.siteUrl,
-          profile: results[0]._id,
-          listing: results[1]._id
+          metricType: req.body.metricType,
+          attributes: {
+            commentText: attributes && attributes.commentText,
+            commentRating: attributes && attributes.commentRating,
+            searchTerm: attributes && attributes.searchTerm
+          }
         })
 
         metric.create(function (err) {

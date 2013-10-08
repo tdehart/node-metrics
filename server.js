@@ -28,18 +28,25 @@ db.on('error', console.error);
 db.once('open', function() {
   console.log("Database open")
 
-  // var Profile = mongoose.model('Profile'),
-  //     Metric = mongoose.model('Metric')
+  console.log(mongoose.Types.ObjectId())
 
-  // async.parallel([
-  //   function (cb) {
-  //     Profile.collection.remove(cb)
-  //   },
-  //   function (cb) {
-  //     Metric.collection.remove(cb)
-  //   }
-  // ])
+  if (config.seedData) {
+    require('./seed.js')
 
+    var Profile = mongoose.model('Profile'),
+        Metric = mongoose.model('Metric'),
+        Listing = mongoose.model('Listing')
+
+    Profile.remove().exec()
+    .then(function() { Listing.remove().exec() })
+    .then(function() { Metric.remove().exec() })
+
+    .then(function() { Profile.seed(require('./scaffolds/profiles.json')) })
+    .then(function() { Listing.seed(require('./scaffolds/listings.json')); })
+    .then(function() { Metric.seed(require('./scaffolds/metrics.json')); })
+
+    console.log("Finished seeding")
+  }
 });
 
 // expose app

@@ -4,13 +4,18 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema
  
 var MetricSchema = Schema({
-  listing: {type : Schema.ObjectId, ref : 'Listing'},
-  profile: {type : Schema.ObjectId, ref : 'Profile'},
-  commentText: {type: String, default: ''},
-  commentRating: {type: Number, min: 1, max: 5 },
-  commentDate: {type: Date, default: Date.now},
-  userAgent: {type: String, default: ''},
-  siteUrl: {type: String, default: ''}
+  listing:    { type : Schema.ObjectId, ref : 'Listing' },
+  profile:    { type : Schema.ObjectId, ref : 'Profile'},
+  timestamp:  { type: String, default: Date.now },
+  userAgent:  { type: String },
+  siteUrl:    { type: String },
+  metricType: { type: String, default: 'view' }, //view, download, comment, search
+  attributes: {
+    commentText: { type: String },
+    commentRating: { type: Number },
+    searchTerm: { type: String }
+  }
+  
 });
 
 MetricSchema.statics = {
