@@ -18,10 +18,11 @@ module.exports = function (app) {
   app.param('profileId', profiles.load)
 
   app.get('/listings', listings.list)
-  app.get('/listings/:listings', listings.show)
+  app.get('/listings/:listingId', listings.show)
   app.post('/listings', listings.create)
   app.put('/listings/:listingId', listings.update)
   app.delete('/listings/:listingId', listings.destroy)
+  app.get('/listings/:listingId/metrics', listings.metrics)
   app.param('listingId', listings.load)
 
   app.get('/', metrics.list)

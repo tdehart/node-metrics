@@ -49,4 +49,4 @@ MetricSchema.methods = {
   }
 }
 
-var Metric = mongoose.model('Metric', MetricSchema);
+mongoose.model('Metric', MetricSchema)

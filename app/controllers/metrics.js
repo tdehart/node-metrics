@@ -22,9 +22,9 @@ exports.list = function(req, res) {
   Metric.list(function(err, metrics) {
     if (err) {
       res.send({'error':'An error has occurred'})
+    } else {
+      res.send(metrics)  
     }
-
-    res.send(metrics)
   })
 }
 

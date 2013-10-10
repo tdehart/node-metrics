@@ -36,4 +36,4 @@ ProfileSchema.methods = {
   }
 }
 
-var Profile = mongoose.model('Profile', ProfileSchema);
+mongoose.model('Profile', ProfileSchema)

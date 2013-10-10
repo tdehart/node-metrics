@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     db: 'mongodb://localhost/test',
-    seedData: false,
+    seedData: true,
     app: {
       name: 'Metrics'
     }

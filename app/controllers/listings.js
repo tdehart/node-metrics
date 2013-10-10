@@ -1,9 +1,10 @@
 var mongoose = require('mongoose'),
     Listing = mongoose.model('Listing'),
+    Metric = mongoose.model('Metric'),
     _ = require('lodash');
 
 exports.load = function(req, res, next, id){
-  Listing.load(id, function (err, profile) {
+  Listing.load(id, function (err, listing) {
     if (err) return next(err)
     if (!listing) return next(new Error('not found'))
     req.listing = listing
@@ -12,16 +13,26 @@ exports.load = function(req, res, next, id){
 }
 
 exports.show = function(req, res) {
-    res.send(req.listing)
+  res.send(req.listing)
 }
 
 exports.list = function(req, res) {
-  Listing.list(function(err, profiles) {
+  Listing.list(function(err, listings) {
     if (err) {
       res.send({'error':'An error has occurred'});
+    } else {
+      res.send(listings)  
     }
+  })
+}
 
-    res.send(profiles)
+exports.metrics = function(req, res) {
+  Metric.find({ listing : req.listing }, function (err, metrics) {
+    if (err) {
+      res.send({'error':'An error has occurred'});
+    } else {
+      res.send(metrics)
+    }
   })
 }
 
@@ -45,7 +56,7 @@ exports.update = function(req, res){
     if (err) {
       res.send({'error':'An error has occurred when updating'});
     } else {
-      res.send(profile);
+      res.send(listing);
     }
   })
 }

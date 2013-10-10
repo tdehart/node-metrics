@@ -28,8 +28,6 @@ db.on('error', console.error);
 db.once('open', function() {
   console.log("Database open")
 
-  console.log(mongoose.Types.ObjectId())
-
   if (config.seedData) {
     require('./seed.js')
 
