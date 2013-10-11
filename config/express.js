@@ -39,6 +39,8 @@ var express = require('express'),
     //   res.locals.csrf_token = req.csrfToken()
     //   next()
     // })
+
+    app.locals.pretty = true
     
   });
 }

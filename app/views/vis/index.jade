@@ -4,10 +4,11 @@ block content
   div.jumbotron
     h1 Metrics
     - if (metrics.length)
+      div.metric
       - each metric in metrics
         .metric
           h3
-            a(href='/metrics/'+metric._id, title=metric.title) #{metric.title}
+            a(href='/metrics/'+metric._id, title=metric.timestamp) #{metric.timestamp}
           p= metric.metricType
 
     - else
