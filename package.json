@@ -15,6 +15,7 @@
         "jade": "latest",
         "async": "latest",
         "lodash": "latest",
-        "view-helpers": "latest"
+        "view-helpers": "latest",
+        "d3": "latest"
     }
 }

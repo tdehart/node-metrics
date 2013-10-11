@@ -19,8 +19,14 @@ Then visit [http://localhost:3000/](http://localhost:3000/)
 -app/
   |__controllers/
   |__models/
+  |__views/
 -config/
   |__routes.js
   |__config.js
   |__express.js (express.js configs)
+-public/
+  |__css
+  |__fonts
+  |__img
+  |__js
 ```

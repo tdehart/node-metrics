@@ -1,15 +1,14 @@
 extends ../layouts/default
 
-block main
-  h1= title
-
 block content
-  - if (metrics.length)
-    - each metric in metrics
-      .metric
-        h3
-          a(href='/metrics/'+metric._id, title=metric.title) #{metric.title}
-        p= metric.metricType
+  div.jumbotron
+    h1 Metrics
+    - if (metrics.length)
+      - each metric in metrics
+        .metric
+          h3
+            a(href='/metrics/'+metric._id, title=metric.title) #{metric.title}
+          p= metric.metricType
 
-  - else
-    p.muted No metrics.&nbsp;
+    - else
+      p.muted No metrics.&nbsp;
