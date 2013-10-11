@@ -1,10 +1,20 @@
 {
     "name": "metrics",
     "description": "Metrics Application",
+    "keywords": [
+      "express",
+      "mongoose",
+      "mongodb",
+      "metrics"
+    ],
     "version": "0.0.1",
     "private": false,
     "dependencies": {
         "express": "latest",
-        "mongoose": "latest"
+        "mongoose": "latest",
+        "jade": "latest",
+        "async": "latest",
+        "lodash": "latest",
+        "view-helpers": "latest"
     }
 }

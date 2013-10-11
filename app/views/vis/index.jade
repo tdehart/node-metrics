@@ -1,0 +1,15 @@
+extends ../layouts/default
+
+block main
+  h1= title
+
+block content
+  - if (metrics.length)
+    - each metric in metrics
+      .metric
+        h3
+          a(href='/metrics/'+metric._id, title=metric.title) #{metric.title}
+        p= metric.metricType
+
+  - else
+    p.muted No metrics.&nbsp;

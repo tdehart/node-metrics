@@ -1,6 +1,7 @@
 var metrics = require('../app/controllers/metrics'),
     profiles = require('../app/controllers/profiles'),
-    listings = require('../app/controllers/listings')
+    listings = require('../app/controllers/listings'),
+    vis = require('../app/controllers/vis')
 
 module.exports = function (app) {
   app.get('/metrics', metrics.list)
@@ -9,6 +10,8 @@ module.exports = function (app) {
   app.put('/metrics/:metricId', metrics.update)
   app.delete('/metrics/:metricId', metrics.destroy)
   app.param('metricId', metrics.load)
+
+  app.get('/vis', vis.index)
 
   app.get('/profiles', profiles.list)
   app.get('/profiles/:profileId', profiles.show)
