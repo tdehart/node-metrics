@@ -11,7 +11,7 @@ $(function() {
   })
 
   function renderGraph(val) {
-   var margin = {top: 20, right: 40, bottom: 30, left: 20},
+   var margin = {top: 20, right: 40, bottom: 40, left: 20},
        width = 1280 - margin.left - margin.right,
        height = 800 - margin.top - margin.bottom;
 
@@ -25,6 +25,12 @@ $(function() {
         .orient("bottom")
         .ticks(d3.time.month, 1)
         .tickFormat(d3.time.format("%b"))
+        .tickSize(0)
+
+    var xAxis2 = d3.svg.axis()
+        .scale(x)
+        .orient("top")
+        .ticks(d3.time.year, 1)
         .tickSize(0)
 
     var yAxis = d3.svg.axis()
@@ -50,13 +56,21 @@ $(function() {
 
 
       svg.append("g")
-        .attr("class", "x axis xaxis")
+        .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis)
         .selectAll("text")
           .style("text-anchor", "end")
           .attr("dx", "2.0em")
           .attr("dy", ".85em")
+
+      svg.append("g")
+        .attr("class", "x axis axis2")
+        .attr("transform", "translate(0," + (height + 40) + ")")
+        .call(xAxis2)
+        .selectAll("text")
+          .style("text-anchor", "end")
+          .attr("dx", "2.2em")
 
       svg.append("g")
         .attr("class", "y axis")

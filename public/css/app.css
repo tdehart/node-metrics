@@ -14,6 +14,10 @@
   margin: auto;
 }
 
+.axis2 path {
+  display: none;
+}
+
 .axis path,
 .axis line {
   fill: none;
