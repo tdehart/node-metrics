@@ -29,14 +29,16 @@ var listings = []
 // listingUrl: {type: String, default: ''}
 
 for (i = 0; i <= 10; i++) {
-  var word1 = Faker.Internet.domainWord()
-  var word2 = Faker.Internet.domainWord()
+  var adj = Faker.random.catch_phrase_adjective()
+  var desc = capitalize(Faker.random.catch_phrase_descriptor())
+  var noun = capitalize(Faker.random.catch_phrase_noun())
+
   listings.push(
     {
       _id: mongoose.Types.ObjectId(),
-      universalName: "com." + word2 + "." + word1,
-      displayName: word1 + " " + word2,
-      listingUrl: "www." + word1 + word2 + ".com"
+      universalName: "com." + desc + "." + noun,
+      displayName: adj + ' ' + desc + ' ' + noun,
+      listingUrl: "www." + desc + noun + ".com"
     })
 }
 
@@ -85,7 +87,7 @@ for (i = 0; i <= 50; i++) {
   })
 }
 
-for (i = 0; i <= 100; i++) {
+for (i = 0; i <= 10000; i++) {
   var types = ['view', 'download']
   metrics.push(
   {
@@ -101,3 +103,7 @@ for (i = 0; i <= 100; i++) {
 fs.writeFile('./scaffolds/profiles.json', JSON.stringify(profiles), function() { console.log('Profiles generated')})
 fs.writeFile('./scaffolds/listings.json', JSON.stringify(listings), function() { console.log('Listings generated')})
 fs.writeFile('./scaffolds/metrics.json', JSON.stringify(metrics), function() { console.log('Metrics generated')})
+
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

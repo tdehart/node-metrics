@@ -31,7 +31,20 @@ exports.metrics = function(req, res) {
     if (err) {
       res.send({'error':'An error has occurred'});
     } else {
-      res.send(metrics)
+      var data = {view: {}, download: {}, comment: {}}
+      _.forEach(metrics, function(m) {  
+        var timestamp = m.timestamp.split('-')[0] + '-' + m.timestamp.split('-')[1]
+        var type = m.metricType
+
+        if (data[type][timestamp] > 0) {
+          data[type][timestamp] += 1
+        } else {
+          data[type][timestamp] = 1
+        }
+        
+      });
+
+      res.send(data)
     }
   })
 }

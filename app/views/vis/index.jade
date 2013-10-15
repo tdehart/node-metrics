@@ -1,15 +1,16 @@
 extends ../layouts/default
 
 block content
-  div.jumbotron
+  div.jumbotron.metrics
     h1 Metrics
-    - if (metrics.length)
-      div.metric
-      - each metric in metrics
-        .metric
-          h3
-            a(href='/metrics/'+metric._id, title=metric.timestamp) #{metric.timestamp}
-          p= metric.metricType
-
+    - if (listings.length)
+      select.form-control.listings-dropdown
+        option(value="None")
+          | Select a listing
+        - each listing in listings
+          option(value=listing._id)
+            = listing.universalName
     - else
       p.muted No metrics.&nbsp;
+
+

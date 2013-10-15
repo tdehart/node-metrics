@@ -3,3 +3,24 @@
   background-color: transparent;
   padding-top: 0;
 }
+
+
+.metric {
+  font: 10px sans-serif;
+}
+
+.listings-dropdown {
+  width: 300px;
+  margin: auto;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.area {
+  fill: steelblue;
+}

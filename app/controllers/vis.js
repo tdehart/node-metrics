@@ -4,11 +4,11 @@ var mongoose = require('mongoose'),
 
 
 exports.index = function(req, res) {
-  Metric.list(function(err, metrics) {
+  Listing.list(function(err, listings) {
     if (err) return res.render('500')
     res.render('vis/index', {
       title: 'Visualizations',
-      metrics: metrics
+      listings: listings
     })
   })
 }

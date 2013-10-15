@@ -9,7 +9,8 @@ This is a prototype Node.js application for recording metrics from [OWF](https:/
 ```sh
   $ git clone https://github.com/tdehart/node-metrics.git
   $ npm install
-  $ npm start
+  $ node generate_seed_data
+  $ node server
 ```
 
 Then visit [http://localhost:3000/](http://localhost:3000/)
