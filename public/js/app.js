@@ -11,21 +11,21 @@ $(function() {
   })
 
   function renderGraph(val) {
-   var margin = {top: 20, right: 20, bottom: 30, left: 50},
-       width = 960 - margin.left - margin.right,
-       height = 500 - margin.top - margin.bottom;
+   var margin = {top: 20, right: 40, bottom: 30, left: 20},
+       width = 1280 - margin.left - margin.right,
+       height = 800 - margin.top - margin.bottom;
 
     var parseDate = d3.time.format("%Y-%m").parse;
 
-    var x = d3.time.scale()
-        .range([0, width]);
-
-    var y = d3.scale.linear()
-        .range([height, 0]);
+    var x = d3.time.scale().range([0, width]);
+    var y = d3.scale.linear().range([height, 0]);
 
     var xAxis = d3.svg.axis()
         .scale(x)
-        .orient("bottom");
+        .orient("bottom")
+        .ticks(d3.time.month, 1)
+        .tickFormat(d3.time.format("%b"))
+        .tickSize(0)
 
     var yAxis = d3.svg.axis()
         .scale(y)
@@ -50,9 +50,13 @@ $(function() {
 
 
       svg.append("g")
-        .attr("class", "x axis")
+        .attr("class", "x axis xaxis")
         .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
+        .call(xAxis)
+        .selectAll("text")
+          .style("text-anchor", "end")
+          .attr("dx", "2.0em")
+          .attr("dy", ".85em")
 
       svg.append("g")
         .attr("class", "y axis")
@@ -69,10 +73,9 @@ $(function() {
         .enter().append("rect")
           .attr("class", "bar")
           .attr("x", function(d) { return x(d.date); })
-          .attr("width", 15)
+          .attr("width", 25)
           .attr("y", function(d) { return y(d.count); })
           .attr("height", function(d) { return height - y(d.count); });
-
 
     });
   }

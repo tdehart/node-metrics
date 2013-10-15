@@ -9,7 +9,7 @@ block content
           | Select a listing
         - each listing in listings
           option(value=listing._id)
-            = listing.universalName
+            = listing.displayName
     - else
       p.muted No metrics.&nbsp;
 

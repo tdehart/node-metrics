@@ -6,7 +6,7 @@
 
 
 .metric {
-  font: 10px sans-serif;
+  font: 11px sans-serif;
 }
 
 .listings-dropdown {
@@ -21,6 +21,7 @@
   shape-rendering: crispEdges;
 }
 
-.area {
+.bar {
   fill: steelblue;
 }
+
