@@ -12,3 +12,13 @@ exports.index = function(req, res) {
     })
   })
 }
+
+exports.graphs = function(req, res) {
+	Listing.list(function(err, listings) {
+    if (err) return res.render('500')
+    res.render('vis/graphs-index', {
+      title: 'Visualizations',
+      listings: listings
+    })
+  })
+}

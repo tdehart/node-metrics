@@ -4,7 +4,7 @@ $(function() {
     var val = $(this).val()
 
     $('.metric').remove()
-    if (val !== "Select a listing") {
+    if (val !== "None") {
       $('.metrics').append('<div class="metric"></div>')
       renderGraph(val)
     }

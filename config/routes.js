@@ -12,6 +12,7 @@ module.exports = function (app) {
   app.param('metricId', metrics.load)
 
   app.get('/vis', vis.index)
+  app.get('/vis/graphs', vis.graphs)
 
   app.get('/profiles', profiles.list)
   app.get('/profiles/:profileId', profiles.show)

@@ -1,0 +1,32 @@
+extends ../layouts/default
+
+block content
+  div.jumbotron.metrics
+    h1 Metrics
+    - if (listings.length)
+      select.form-control.listings-dropdown
+        option(value="None")
+          | Select a listing
+        - each listing in listings
+          option(value=listing._id)
+            = listing.universalName
+      div.year-radio
+        input(type="radio", name="year", value="2013", checked)
+        label 2013
+        input(type="radio", name="year", value="2012")
+        label 2012
+        input(type="radio", name="year", value="2011")
+        label 2011
+        br
+      div.graph-radio
+        input(type="radio", name="graph", value="Bar", checked)
+        label Bar Graph
+        input(type="radio", name="graph", value="Pie")
+        label Pie Graph
+      div.compare-checkboxes
+            input.compareDownloads-checkbox(type="checkbox", name="compare", value="downloads")
+            label Downloads
+    - else
+      p.muted No metrics.&nbsp;
+
+

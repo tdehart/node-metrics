@@ -1,0 +1,67 @@
+.jumbotron {
+  text-align: center;
+  background-color: transparent;
+  padding-top: 0;
+}
+
+.metric {
+  font: 10px sans-serif;
+}
+
+.listings-dropdown {
+  width: 300px;
+  margin: auto;
+}
+
+.compare-checkboxes {
+  color: orange;
+}
+
+label {
+  margin-right: 15px;
+}
+
+.x-axis path {
+  fill: lightgrey;
+  stroke: lightgrey;
+}
+
+.x-axis .tick text {
+  fill: black;
+  stroke: black;
+  opacity: .75;
+  transform: translate(20,0);
+}
+
+.y-axis path {
+  display: none;
+}
+
+.y-axis .tick {
+  fill: black;
+  stroke: black;
+}
+
+.y-axis line {
+  fill: lightgrey;
+  stroke: lightgrey;
+  opacity: .5;
+  stroke-width: 4;
+}
+
+.lines {
+  stroke: grey;
+  opacity: .5;
+}
+
+.scale {
+  stroke: grey;
+  font-size: 14px;
+  opacity: .75;
+}
+
+.mini-circles {
+  fill: none;
+  stroke: grey;
+  opacity: .5;
+}
