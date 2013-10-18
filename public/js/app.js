@@ -6,19 +6,19 @@ $(function() {
     $('.metric').remove()
     if (val !== "None") {
       $('.metrics').append('<div class="metric"></div>')
-      renderGraph(val)
+      renderGraph(val, "monthly")
     }
   })
 
-  function renderGraph(val) {
+  function renderGraph(val, interval) {
    var margin = {top: 20, right: 40, bottom: 40, left: 20},
        width = 1280 - margin.left - margin.right,
        height = 800 - margin.top - margin.bottom;
 
-    var parseDate = d3.time.format("%Y-%m").parse;
-
-    var x = d3.time.scale().range([0, width]);
+    var x = d3.time.scale().rangeRound([0, width])
     var y = d3.scale.linear().range([height, 0]);
+    
+    var parseDate = d3.time.format("%Y-%m").parse;
 
     var xAxis = d3.svg.axis()
         .scale(x)
@@ -43,9 +43,9 @@ $(function() {
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.json("http://127.0.0.1:3000/listings/" + val + "/metrics2?interval=monthly", function(error, data) {
+    d3.json("http://127.0.0.1:3000/listings/" + val + "/metrics2?interval=" + interval, function(error, data) {
       _.forEach(data.view, function(d) {
-        d.date = parseDate(d.date)
+        d.date = parseDate(d.date.toString())
       })
 
       x.domain(d3.extent(data.view, function(d) { return d.date; }));
@@ -83,15 +83,17 @@ $(function() {
           .data(data.view)
         .enter().append("rect")
           .attr("class", "bar")
-          .attr("x", function(d) { return x(d.date); })
+          .attr("x", function(d) { 
+            return x(d.date); 
+          })
           .attr("width", 25)
-          .attr("y", function(d) { return y(d.count); })
-          .attr("height", function(d) { return height - y(d.count); });
+          .attr("y", function(d) { 
+            return y(d.count); 
+          })
+          .attr("height", function(d) { 
+            return height - y(d.count); 
+          });
 
     });
   }
-
-
-
-
 });

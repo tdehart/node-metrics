@@ -12,7 +12,7 @@ exports.load = function(req, res, next, id){
 }
 
 exports.show = function(req, res) {
-    res.send(req.profile)
+  res.send(req.profile)
 }
 
 exports.list = function(req, res) {

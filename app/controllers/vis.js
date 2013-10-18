@@ -22,13 +22,3 @@ exports.graphs = function(req, res) {
     })
   })
 }
-
-exports.zoomableGraph = function(req, res) {
-  Listing.list(function(err, listings) {
-    if (err) return res.render('500')
-    res.render('vis/zoomable-graph-test', {
-      title: 'Visualizations',
-      listings: listings
-    })
-  })
-}

@@ -14,6 +14,10 @@
   margin: auto;
 }
 
+.y path {
+  display: none;
+}
+
 .axis2 path {
   display: none;
 }

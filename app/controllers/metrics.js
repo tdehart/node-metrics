@@ -15,7 +15,7 @@ exports.load = function(req, res, next, id){
 }
 
 exports.show = function(req, res) {
-    res.send(req.metric)
+  res.send(req.metric)
 }
 
 exports.list = function(req, res) {
@@ -33,48 +33,48 @@ exports.list = function(req, res) {
 }
 
 exports.create = function (req, res) {
-    //Find profile by email and listing by universalName in parallel then create metric
-    async.parallel([
-      function (cb) {
-        Profile.findOne({ email: req.body.profile }, function (err, profile) {
-          cb(err, profile)
-        })
-      },
-      function (cb) {
-        Listing.findOne({ universalName: req.body.listing }, function (err, listing) {
-          cb(err, listing)
-        })
-      }
-    ],
+  //Find profile by email and listing by universalName in parallel then create metric
+  async.parallel([
+    function (cb) {
+      Profile.findOne({ email: req.body.profile }, function (err, profile) {
+        cb(err, profile)
+      })
+    },
+    function (cb) {
+      Listing.findOne({ universalName: req.body.listing }, function (err, listing) {
+        cb(err, listing)
+      })
+    }
+  ],
 
-    function(err, results) {
-      if (err) {
-        res.send({'error':'An error has occurred while finding metric references'})
-      } else {
-        var attributes
-        if (req.body.attributes) attributes = JSON.parse(req.body.attributes)
-        var metric = new Metric({
-          profile: results[0] && results[0]._id,
-          listing: results[1] && results[1]._id,
-          userAgent: req.body.userAgent,
-          siteUrl: req.body.siteUrl,
-          metricType: req.body.metricType,
-          attributes: {
-            commentText: attributes && attributes.commentText,
-            commentRating: attributes && attributes.commentRating,
-            searchTerm: attributes && attributes.searchTerm
-          }
-        })
+  function(err, results) {
+    if (err) {
+      res.send({'error':'An error has occurred while finding metric references'})
+    } else {
+      var attributes
+      if (req.body.attributes) attributes = JSON.parse(req.body.attributes)
+      var metric = new Metric({
+        profile: results[0] && results[0]._id,
+        listing: results[1] && results[1]._id,
+        userAgent: req.body.userAgent,
+        siteUrl: req.body.siteUrl,
+        metricType: req.body.metricType,
+        attributes: {
+          commentText: attributes && attributes.commentText,
+          commentRating: attributes && attributes.commentRating,
+          searchTerm: attributes && attributes.searchTerm
+        }
+      })
 
-        metric.create(function (err) {
-          if (err) {
-            res.send({'error':'An error has occurred when creating'})
-          } else {
-            res.send(metric);
-          }
-        })  
-      }
-    })
+      metric.create(function (err) {
+        if (err) {
+          res.send({'error':'An error has occurred when creating'})
+        } else {
+          res.send(metric);
+        }
+      })  
+    }
+  })
 }
 
 exports.update = function(req, res){
