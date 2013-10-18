@@ -19,7 +19,11 @@ exports.show = function(req, res) {
 }
 
 exports.list = function(req, res) {
-  Metric.list(function(err, metrics) {
+  var options = {}
+  
+  options.metricTypes = typeof req.param('type') !== 'undefined' ? _.flatten([req.param('type')]) : []
+
+  Metric.list(options, function(err, metrics) {
     if (err) {
       res.send({'error':'An error has occurred'})
     } else {

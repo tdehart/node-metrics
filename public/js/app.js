@@ -43,16 +43,13 @@ $(function() {
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.json("http://127.0.0.1:3000/listings/" + val + "/metrics", function(error, data) {
-      this.views = []
-      var self = this
-
-      _.forEach(data.view, function(val, key) {
-        self.views.push({date: parseDate(key), count: val})
+    d3.json("http://127.0.0.1:3000/listings/" + val + "/metrics2?interval=monthly", function(error, data) {
+      _.forEach(data.view, function(d) {
+        d.date = parseDate(d.date)
       })
 
-      x.domain(d3.extent(this.views, function(d) { return d.date; }));
-      y.domain([0, d3.max(this.views, function(d) { return d.count; })]);
+      x.domain(d3.extent(data.view, function(d) { return d.date; }));
+      y.domain([0, d3.max(data.view, function(d) { return d.count; })]);
 
 
       svg.append("g")
@@ -83,7 +80,7 @@ $(function() {
         .text("Views");
 
        svg.selectAll(".bar")
-          .data(this.views)
+          .data(data.view)
         .enter().append("rect")
           .attr("class", "bar")
           .attr("x", function(d) { return x(d.date); })

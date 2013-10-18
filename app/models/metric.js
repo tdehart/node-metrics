@@ -1,7 +1,8 @@
 var mongoose = require('mongoose'),
     env = process.env.NODE_ENV || 'development',
     config = require('../../config/config')[env],
-    Schema = mongoose.Schema
+    Schema = mongoose.Schema,
+    metricTypes = ['view', 'download', 'comment', 'search']
  
 var MetricSchema = Schema({
   listing:    { type : Schema.ObjectId, ref : 'Listing' },
@@ -15,7 +16,6 @@ var MetricSchema = Schema({
     commentRating: { type: Number },
     searchTerm: { type: String }
   }
-  
 });
 
 MetricSchema.statics = {
@@ -26,11 +26,15 @@ MetricSchema.statics = {
       .exec(cb)
   },
 
-  list: function(cb) {
-    this.find()
+  list: function(options, cb) {
+    var types = options.metricTypes.length > 0 ? options.metricTypes : metricTypes
+    var criteria = options.criteria || {}
+
+    this.find(criteria)
+      .where('metricType').in(types)
+      .sort({ 'timestamp': -1 })
       .populate('profile', 'fullName username email')
       .populate('listing', 'universalName displayName listingUrl')
-      .sort({ 'createdAt': -1 })
       .exec(cb)
   }
 }

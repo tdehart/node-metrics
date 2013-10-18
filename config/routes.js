@@ -27,6 +27,7 @@ module.exports = function (app) {
   app.put('/listings/:listingId', listings.update)
   app.delete('/listings/:listingId', listings.destroy)
   app.get('/listings/:listingId/metrics', listings.metrics)
+  app.get('/listings/:listingId/metrics2', listings.metrics2)
   app.param('listingId', listings.load)
 
   app.get('/', metrics.list)
