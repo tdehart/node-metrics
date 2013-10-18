@@ -23,10 +23,19 @@ block content
         label Bar Graph
         input(type="radio", name="graph", value="Pie")
         label Pie Graph
+        input(type="radio", name="graph", value="Comments/Ratings")
+        label Comments/Ratings Graphs
+      div.comments-radio
+        input.comments-bar-radio(type="radio", name="comments", value="Bar")
+        label Bar Graph
+        input.comments-line-radio(type="radio", name="comments", value="Line")
+        label Line Graph
       div.compare-checkboxes
-            input.compareDownloads-checkbox(type="checkbox", name="compare", value="downloads")
-            label Downloads
-    - else
+        input.compareViews-checkbox(type="checkbox", name="compare", value="views")
+        label.compareViews-label Views
+        input.compareDownloads-checkbox(type="checkbox", name="compare", value="downloads")
+        label.compareDownloads-label Downloads
+- else
       p.muted No metrics.&nbsp;
 
 

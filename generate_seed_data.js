@@ -59,7 +59,7 @@ var userAgents = ["Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML
 var siteUrls = ['https://www.google.com/marketplace', 'https://www.yahoo.com/marketplace', 'https://www.bing.com/marketplace']
 var startDate = new Date(2011, 0, 1)
 var endDate = new Date()
-for (i = 0; i <= 50; i++) {
+for (i = 0; i <= 10000; i++) {
   metrics.push(
   {
     listing: listings[Math.floor(Math.random() * listings.length)]._id,

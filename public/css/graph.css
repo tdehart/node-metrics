@@ -13,10 +13,6 @@
   margin: auto;
 }
 
-.compare-checkboxes {
-  color: orange;
-}
-
 label {
   margin-right: 15px;
 }
@@ -30,7 +26,9 @@ label {
   fill: black;
   stroke: black;
   opacity: .75;
-  transform: translate(20,0);
+  -ms-transform: translate(20px,0px);
+  -moz-transform: translate(20px,0px);
+  -webkit-transform: translate(20px,0px);
 }
 
 .y-axis path {
@@ -49,6 +47,10 @@ label {
   stroke-width: 4;
 }
 
+.y-axis text {
+  display: none;
+}
+
 .lines {
   stroke: grey;
   opacity: .5;
@@ -64,4 +66,27 @@ label {
   fill: none;
   stroke: grey;
   opacity: .5;
+}
+
+.compareViews-label {
+  color: blue;
+}
+
+.compareDownloads-label {
+  color: orange;
+}
+
+.average-line {
+  fill: none;
+  stroke: #1A7AEA;
+  stroke-width: 8;
+}
+
+.dots {
+  fill: #1A7AEA;
+  stroke: #1A7AEA;
+}
+
+.rate-lines {
+  stroke: none;
 }

@@ -36,10 +36,19 @@ exports.metrics = function(req, res) {
         var timestamp = m.timestamp.split('-')[0] + '-' + m.timestamp.split('-')[1]
         var type = m.metricType
 
-        if (data[type][timestamp] > 0) {
-          data[type][timestamp] += 1
+        if (type == "comment") {
+          if (data[type][timestamp]) {
+            data[type][timestamp][m.attributes.commentRating] += 1
+          } else {
+            data[type][timestamp] = {1:0, 2:0, 3:0, 4:0, 5:0}
+            data[type][timestamp][m.attributes.commentRating] += 1
+          }
         } else {
-          data[type][timestamp] = 1
+          if (data[type][timestamp] > 0) {
+            data[type][timestamp] += 1
+          } else {
+            data[type][timestamp] = 1
+          }
         }
         
       });
