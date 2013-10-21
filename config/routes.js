@@ -30,5 +30,5 @@ module.exports = function (app) {
   app.get('/listings/:listingId/metrics2', listings.metrics2)
   app.param('listingId', listings.load)
 
-  app.get('/', metrics.list)
+  app.get('/', vis.index)
 }

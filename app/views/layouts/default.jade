@@ -1,9 +1,14 @@
 !!! 5
 html
+  block link
+    -var selected = 'Home'; //default
+
+  -var menu = { 'Home': '/vis', 'Graphs': '/vis/graphs' };
+
   head
     block head
       block title
-        title Program Name
+        title Metrics
       block meta
         meta(charset="utf-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")

@@ -9,9 +9,25 @@ div.container
         | Metrics
     div.collapse.navbar-collapse
       ul.nav.navbar-nav
-        li.active
-          a(href="#") Home
-        li
-          a(href="#about") About
-        li
-          a(href="#contact") Contact
+        each val, key in menu
+          if selected === key
+            li.active
+              a(href=val, title=key)= key
+          else
+            li
+              a(href=val, title=key)= key
+
+        li.dropdown
+          a.dropdown-toggle(href="#" data-toggle="dropdown")
+            | API
+            span.caret
+          ul.dropdown-menu
+            li
+              a(href="/metrics")
+                | Metrics
+            li
+              a(href="/listings")
+                | Listings
+            li
+              a(href="/profiles")
+                | Profiles
