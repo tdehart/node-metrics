@@ -76,6 +76,7 @@ for (i = 0; i <= 10000; i++) {
 
   metrics.push(
   {
+    listing: listings[Math.floor(Math.random() * listings.length)]._id,
     profile: profiles[Math.floor(Math.random() * profiles.length)]._id,
     userAgent: userAgents[Math.floor(Math.random() * userAgents.length)],
     siteUrl: siteUrls[Math.floor(Math.random() * siteUrls.length)],

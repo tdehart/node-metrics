@@ -36,14 +36,51 @@ block content
       div.view-compare-checkboxes
         input.view-compareDownloads-checkbox(type="checkbox", name="compare", value="downloads")
         label.compareDownloads-label Downloads
-      label Select year:
-      select.year-dropdown
-        - for (var year=2013; year >= 2011; year--)
-          option(value=year)
-            = year
+      div.date-selection
+        label Select date:
+        select.month-dropdown
+          option(value="00")
+            = "None"
+          option(value="01")
+            = "January"
+          option(value="02")
+            = "February"
+          option(value="03")
+            = "March"
+          option(value="04")
+            = "April"
+          option(value="05")
+            = "May"
+          option(value="06")
+            = "June"
+          option(value="07")
+            = "July"
+          option(value="08")
+            = "August"
+          option(value="09")
+            = "September"
+          option(value="10")
+            = "October"
+          option(value="11")
+            = "November"
+          option(value="12")
+            = "December"
+        select.day-dropdown
+          option(value="00")
+            = "None"
+          - for (var day=1; day <= 31; day++)
+            option(value=day)
+              = day
+        select.year-dropdown
+          - for (var year=2013; year >= 2011; year--)
+            option(value=year)
+              = year
+        input.yearly-checkbox(type="checkbox", name="yearly", value="yearly")
+        label.yearly-label Show Yearly
 - else
       p.muted No metrics.&nbsp;
 
 
 block scripts
   script(src='/js/graphsApp.js')
+  script(src='/js/d3.layout.cloud.js')

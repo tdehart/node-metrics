@@ -80,6 +80,9 @@ label {
   fill: none;
   stroke: #1A7AEA;
   stroke-width: 8;
+  -ms-transform: translate(10px,0px);
+  -moz-transform: translate(10px,0px);
+  -webkit-transform: translate(10px,0px);
 }
 
 .dots {
@@ -87,6 +90,39 @@ label {
   stroke: #1A7AEA;
 }
 
-.rate-lines {
+.rate-lines, .comments {
   stroke: none;
+}
+
+.rate-lines {
+  -ms-transform: translate(10px,0px);
+  -moz-transform: translate(10px,0px);
+  -webkit-transform: translate(10px,0px);
+}
+
+.textCloud {
+  text-anchor: middle;
+  font-family: Arial;
+}
+
+.circles {
+  stroke-width: 1.5;
+}
+
+.searchTerms {
+  text-anchor: middle;
+  stroke: white;
+  fill: white;
+  font-family: Georgia;
+}
+
+.key {
+  stroke: darkgrey;
+  font-size: 14px;
+  opacity: .85;
+}
+
+.counts {
+  stroke: black;
+  opacity: 1;
 }
